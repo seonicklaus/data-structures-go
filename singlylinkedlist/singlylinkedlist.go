@@ -13,36 +13,36 @@ type node struct {
 }
 
 // Struct representation of a LinkedList
-type singlyLinkedList struct {
+type SinglyLinkedList struct {
 	head *node
 	tail *node
 	size int
 }
 
 // Get size of LinkedList
-func (l singlyLinkedList) getSize() int {
+func (l SinglyLinkedList) GetSize() int {
 	return l.size
 }
 
 // Check if LinkedList is empty
-func (l singlyLinkedList) isEmpty() bool {
+func (l SinglyLinkedList) IsEmpty() bool {
 	return l.size == 0
 }
 
 // Get first element of Linked List, O(1)
-func (l singlyLinkedList) peekFirst() int {
+func (l SinglyLinkedList) PeekFirst() int {
 	return l.head.value
 }
 
 // Get last element of LinkedList, O(1)
-func (l singlyLinkedList) peekLast() int {
+func (l SinglyLinkedList) PeekLast() int {
 	return l.tail.value
 }
 
 // Get index of an element (zero-based), O(n)
-func (l singlyLinkedList) indexOf(value int) (int, error) {
+func (l SinglyLinkedList) IndexOf(value int) (int, error) {
 
-	if l.isEmpty() {
+	if l.IsEmpty() {
 		return 0, errors.New("linked list is empty")
 	}
 
@@ -63,9 +63,9 @@ func (l singlyLinkedList) indexOf(value int) (int, error) {
 }
 
 // Get value of an element based on index (negative index reverses order), O(1) for first and last index, O(n) for in between
-func (l singlyLinkedList) get(idx int) (int, error) {
+func (l SinglyLinkedList) Get(idx int) (int, error) {
 
-	if l.isEmpty() {
+	if l.IsEmpty() {
 		return 0, errors.New("linked list is empty")
 	}
 
@@ -97,7 +97,7 @@ func (l singlyLinkedList) get(idx int) (int, error) {
 }
 
 // Delete all element in Linked List, O(n)
-func (l *singlyLinkedList) clear() {
+func (l *SinglyLinkedList) Clear() {
 
 	travNode := l.head
 
@@ -113,9 +113,9 @@ func (l *singlyLinkedList) clear() {
 }
 
 // Adds element into Linked List, O(1)
-func (l *singlyLinkedList) add(value int) {
+func (l *SinglyLinkedList) Add(value int) {
 
-	if l.isEmpty() {
+	if l.IsEmpty() {
 
 		l.head = &node{value: value}
 		l.tail = l.head
@@ -131,9 +131,9 @@ func (l *singlyLinkedList) add(value int) {
 }
 
 // Removes first element in Linked List, O(1)
-func (l *singlyLinkedList) removeFirst() (int, error) {
+func (l *SinglyLinkedList) RemoveFirst() (int, error) {
 
-	if l.isEmpty() {
+	if l.IsEmpty() {
 		return 0, errors.New("linked list is empty")
 	}
 
@@ -149,9 +149,9 @@ func (l *singlyLinkedList) removeFirst() (int, error) {
 }
 
 // Removes last element in Linked List, O(1)
-func (l *singlyLinkedList) removeLast() (int, error) {
+func (l *SinglyLinkedList) RemoveLast() (int, error) {
 
-	if l.isEmpty() {
+	if l.IsEmpty() {
 		return 0, errors.New("linked list is empty")
 	}
 
@@ -172,9 +172,9 @@ func (l *singlyLinkedList) removeLast() (int, error) {
 }
 
 // Removes element based on index (negative index reverses order), O(1) for first and last index, O(n) for in-between
-func (l *singlyLinkedList) removeAt(idx int) (int, error) {
+func (l *SinglyLinkedList) RemoveAt(idx int) (int, error) {
 
-	if l.isEmpty() {
+	if l.IsEmpty() {
 		return 0, errors.New("linked list is empty")
 	}
 
@@ -188,12 +188,12 @@ func (l *singlyLinkedList) removeAt(idx int) (int, error) {
 
 	if indexToRemove == 0 {
 
-		data, _ := l.removeFirst()
+		data, _ := l.RemoveFirst()
 		return data, nil
 
 	} else if indexToRemove == l.size-1 {
 
-		data, _ := l.removeLast()
+		data, _ := l.RemoveLast()
 		return data, nil
 
 	} else if indexToRemove < 0 || indexToRemove >= l.size {
@@ -228,9 +228,9 @@ func (n *node) String() string {
 }
 
 // String representation of a Linked List
-func (l singlyLinkedList) String() string {
+func (l SinglyLinkedList) String() string {
 
-	if l.isEmpty() {
+	if l.IsEmpty() {
 		return "nil"
 	}
 
