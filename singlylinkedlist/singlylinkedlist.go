@@ -1,4 +1,4 @@
-package main
+package singlylinkedlist
 
 import (
 	"errors"
@@ -243,55 +243,4 @@ func (l singlyLinkedList) String() string {
 	sb.WriteString("nil")
 
 	return sb.String()
-}
-
-func main() {
-
-	sll := singlyLinkedList{}
-
-	for i := 1; i <= 10; i++ {
-		sll.add(i)
-	}
-
-	fmt.Println(sll)
-
-	fmt.Println(sll.peekLast())
-
-	removedInt, err := sll.removeLast()
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println("Removed value:", removedInt)
-	}
-
-	index, err := sll.indexOf(8)
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println("Index:", index)
-	}
-
-	value1, err := sll.removeAt(5)
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println("Value removed:", value1)
-	}
-
-	fmt.Println(sll.peekFirst())
-
-	value2, err := sll.get(1)
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println("Value:", value2)
-	}
-
-	fmt.Println(sll)
-
-	fmt.Println(sll.getSize())
-
-	sll.clear()
-	fmt.Println(sll)
-
 }
