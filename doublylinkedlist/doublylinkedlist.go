@@ -157,9 +157,12 @@ func (l *DoublyLinkedList) RemoveFirst() (int, error) {
 	l.head.previous.next = nil
 	l.head.previous = nil
 
+	l.size--
+
 	return data, nil
 }
 
+// RemoveLast method, removes the last Node from Linked List, O(1)
 func (l *DoublyLinkedList) RemoveLast() (int, error) {
 	if l.IsEmpty() {
 		return 0, errors.New("linked list is empty")
@@ -167,11 +170,80 @@ func (l *DoublyLinkedList) RemoveLast() (int, error) {
 
 	data := l.tail.data
 	l.tail = l.tail.previous
-	l.tail.previous.data = 0
+	l.tail.next.data = 0
 	l.tail.next.previous = nil
 	l.tail.next = nil
 
+	l.size--
+
 	return data, nil
+}
+
+// RemoveAt method, removes a Node at a specific index (negative index reverses order), O(log n)
+func (l *DoublyLinkedList) RemoveAt(idx int) (int, error) {
+	if l.IsEmpty() {
+		return 0, errors.New("linked list is empty")
+	}
+
+	indexToRemove := 0
+
+	if idx >= 0 {
+		indexToRemove = idx
+	} else {
+		indexToRemove = l.size + idx
+	}
+
+	if indexToRemove < 0 || indexToRemove >= l.size {
+		return 0, errors.New("index out of range")
+	}
+
+	travNode := l.head
+
+	if indexToRemove < l.size/2 {
+
+		for index := 0; index != indexToRemove; index++ {
+			travNode = travNode.next
+		}
+
+	} else {
+		travNode = l.tail
+
+		for index := l.size - 1; index != indexToRemove; index-- {
+			travNode = travNode.previous
+		}
+
+	}
+
+	data := l.RemoveNode(travNode)
+
+	return data, nil
+}
+
+// Remove arbitrary Node from Linked List, O(1)
+func (l *DoublyLinkedList) RemoveNode(node *node) int {
+
+	if node.previous == nil {
+		data, _ := l.RemoveFirst()
+		return data
+	}
+
+	if node.next == nil {
+		data, _ := l.RemoveLast()
+		return data
+	}
+
+	data := node.data
+
+	node.previous.next = node.next
+	node.next.previous = node.previous
+	node.previous = nil
+	node.next = nil
+
+	node.data = 0
+
+	l.size--
+
+	return data
 }
 
 func (n node) String() string {
@@ -196,6 +268,11 @@ func main() {
 	dll.AddLast(9)
 	dll.AddFirst(8)
 	dll.AddLast(2)
+	dll.AddFirst(10)
+	dll.AddLast(3)
+
+	fmt.Println(dll.PeekFirst())
+	fmt.Println(dll.PeekLast())
 
 	fmt.Println(dll)
 
