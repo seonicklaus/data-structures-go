@@ -1,4 +1,4 @@
-package main
+package doublylinkedlist
 
 import (
 	"errors"
@@ -260,20 +260,4 @@ func (l DoublyLinkedList) String() string {
 	sb.WriteString("nil")
 
 	return sb.String()
-}
-
-func main() {
-	dll := DoublyLinkedList{}
-	dll.AddFirst(1)
-	dll.AddLast(9)
-	dll.AddFirst(8)
-	dll.AddLast(2)
-	dll.AddFirst(10)
-	dll.AddLast(3)
-
-	fmt.Println(dll.PeekFirst())
-	fmt.Println(dll.PeekLast())
-
-	fmt.Println(dll)
-
 }
